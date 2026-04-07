@@ -140,4 +140,4 @@ No MCP server. No background process. The plugin calls a fast native Rust binary
 
 ## License
 
-MIT
+Apache 2.0
