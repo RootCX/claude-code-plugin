@@ -1,0 +1,11 @@
+{
+  "name": "rootcx",
+  "owner": { "name": "RootCX", "url": "https://rootcx.com" },
+  "plugins": [
+    {
+      "name": "rootcx",
+      "source": "./",
+      "description": "Build and deploy internal apps and AI agents directly from Claude Code"
+    }
+  ]
+}
