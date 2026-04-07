@@ -7,7 +7,7 @@
 <h3 align="center">RootCX Plugin for Claude Code</h3>
 
 <p align="center">
-Build and deploy RootCX apps and AI agents directly from Claude Code — no IDE required.
+Build and deploy RootCX apps and AI agents directly from Claude Code.
 </p>
 
 <p align="center">
@@ -24,9 +24,9 @@ Build and deploy RootCX apps and AI agents directly from Claude Code — no IDE 
 
 ## What is this?
 
-The official [Claude Code](https://docs.anthropic.com/en/docs/claude-code) plugin for [RootCX](https://rootcx.com) — the open-source platform for building internal software and AI agents.
+The official [Claude Code](https://docs.anthropic.com/en/docs/claude-code) plugin for [RootCX](https://rootcx.com), the open-source platform for building internal software and AI agents.
 
-Instead of using RootCX Studio (the desktop IDE), you code directly in your terminal with Claude as your pair programmer. Connect to any RootCX Core, scaffold projects, and deploy — all through natural language.
+Connect to any RootCX Core (local or cloud), scaffold full-stack projects, and deploy. All through natural language, directly from your terminal. No IDE required.
 
 ## Quick Start
 
@@ -47,19 +47,19 @@ Download the `rootcx` binary from [Releases](https://github.com/RootCX/RootCX/re
 /rootcx:connect http://localhost:9100
 ```
 
-Authentication is automatic — password, OIDC SSO, or no-auth for local dev.
+Authentication is automatic: password, OIDC SSO, or no-auth for local dev.
 
 ```
 /rootcx:new app my-crm
 ```
 
-Claude scaffolds a complete project: Vite + React 19 + Tailwind v4 + `@rootcx/sdk` + `@rootcx/ui`.
+Claude scaffolds a complete project with Vite, React 19, Tailwind v4, `@rootcx/sdk` and `@rootcx/ui`.
 
 ```
 /rootcx:deploy
 ```
 
-Manifest sync, backend upload, frontend deploy, worker start — one command.
+Manifest sync, backend upload, frontend deploy, worker start. One command.
 
 ## Commands
 
@@ -71,56 +71,57 @@ Manifest sync, backend upload, frontend deploy, worker start — one command.
 
 ## Skills
 
-Six specialized skills teach Claude Code how to build for RootCX. They load automatically when relevant.
+Six specialized skills that teach Claude Code how to build for RootCX. Loaded automatically when relevant.
 
-| Skill | Claude Code learns... |
-|-------|----------------------|
-| **rootcx-manifest** | `manifest.json` — entities, field types, entity links, RBAC permissions, schema sync |
-| **rootcx-sdk-hooks** | `@rootcx/sdk` — `useAppCollection`, `useAppRecord`, `useIntegration`, query operators |
-| **rootcx-ui** | `@rootcx/ui` — AppShell, Sidebar, DataTable, forms, dark mode, AuthGate |
-| **rootcx-rest-api** | Core REST API — collections CRUD, bulk ops, integrations, async jobs |
-| **rootcx-backend-worker** | Backend workers — Bun IPC protocol, RPC handlers, job processing |
-| **rootcx-agent** | AI agents — `agent.json`, LangGraph, IPC bridge, tool-calling with RBAC |
+| Skill | Claude Code learns |
+|-------|-------------------|
+| **rootcx-manifest** | `manifest.json`: entities, field types, entity links, RBAC permissions, schema sync |
+| **rootcx-sdk-hooks** | `@rootcx/sdk`: `useAppCollection`, `useAppRecord`, `useIntegration`, query operators |
+| **rootcx-ui** | `@rootcx/ui`: AppShell, Sidebar, DataTable, forms, dark mode, AuthGate |
+| **rootcx-rest-api** | Core REST API: collections CRUD, bulk ops, integrations, async jobs |
+| **rootcx-backend-worker** | Backend workers: Bun IPC protocol, RPC handlers, job processing |
+| **rootcx-agent** | AI agents: `agent.json`, LangGraph, IPC bridge, tool-calling with RBAC |
 
 ## What You Can Build
 
 ### Apps
 
-Full-stack internal tools with a React frontend, PostgreSQL data layer, and optional backend workers. Think CRMs, dashboards, admin panels, inventory systems.
+Full-stack internal tools with a React frontend, managed PostgreSQL, and optional backend workers. CRMs, dashboards, admin panels, inventory systems.
 
 ```
 You: Create a CRM with contacts, companies, and deals.
      Add a kanban view for deals grouped by pipeline stage.
 
-Claude: → manifest.json with 3 entities and entity links
-        → React views with DataTable and drag-and-drop Kanban
-        → One-command deploy to your Core
+Claude: Generates manifest.json with 3 entities and entity links,
+        scaffolds React views with DataTable and Kanban,
+        deploys to your connected Core.
 ```
 
 ### AI Agents
 
-LangGraph-powered agents with tool access to your app data, streaming chat UI, and full RBAC.
+LangGraph-powered agents with secure tool access to your app data, streaming chat UI, and full RBAC enforcement.
 
 ```
 You: Build a support agent that searches our ticket database,
      suggests solutions, and can escalate to humans.
 
-Claude: → agent.json with system prompt and tool config
-        → LangGraph backend with query and escalation tools
-        → Chat UI with streaming responses and tool activity
+Claude: Generates agent.json with system prompt and tool config,
+        scaffolds LangGraph backend with query and escalation tools,
+        creates chat UI with streaming responses and tool activity.
 ```
 
 ## How It Works
 
 ```
 Claude Code
-├── /rootcx:* commands    → call the rootcx CLI via Bash
-├── Skills (6)            → loaded on demand for deep platform knowledge
-│
-└── rootcx CLI (Rust)     → handles auth, scaffold, archive, deploy
-    │
-    ▼ HTTP
-    RootCX Core (:9100)   → local or remote
+  /rootcx:* commands      call the rootcx CLI via Bash
+  Skills (6)               loaded on demand for deep platform knowledge
+
+  rootcx CLI (Rust)        handles auth, scaffold, archive, deploy
+      |
+      | HTTP
+      v
+  RootCX Core (:9100)     local or remote
 ```
 
 No MCP server. No background process. The plugin calls a fast native Rust binary that talks to the Core REST API. Same protocol as Studio.
@@ -129,13 +130,13 @@ No MCP server. No background process. The plugin calls a fast native Rust binary
 
 - [Claude Code](https://docs.anthropic.com/en/docs/claude-code) (CLI, desktop app, or IDE extension)
 - [`rootcx` CLI](https://github.com/RootCX/RootCX/releases) in your PATH
-- A RootCX Core — [cloud](https://rootcx.com/app/register) or [self-hosted](https://rootcx.com/docs/developers/self-hosting)
+- A RootCX Core: [cloud](https://rootcx.com/app/register) or [self-hosted](https://rootcx.com/docs/developers/self-hosting)
 
 ## Community
 
-- [Discord](https://discord.gg/rootcx) — questions, discussion, support
-- [GitHub Issues](https://github.com/rootcx/rootcx/issues) — bugs and feature requests
-- [Documentation](https://rootcx.com/docs) — guides, references, API docs
+- [Discord](https://discord.gg/rootcx) for questions, discussion, and support
+- [GitHub Issues](https://github.com/rootcx/rootcx/issues) for bugs and feature requests
+- [Documentation](https://rootcx.com/docs) for guides, references, and API docs
 
 ## License
 
