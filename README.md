@@ -39,7 +39,9 @@ Connect to any RootCX Core (local or cloud), scaffold full-stack projects, and d
 
 ### 2. Install the CLI
 
-Download the `rootcx` binary from [Releases](https://github.com/RootCX/RootCX/releases) and add it to your PATH.
+```
+curl -fsSL https://raw.githubusercontent.com/RootCX/RootCX/main/scripts/install.sh | sh
+```
 
 ### 3. Connect and build
 
