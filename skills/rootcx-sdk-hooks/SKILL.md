@@ -1,6 +1,6 @@
 ---
 name: rootcx-sdk-hooks
-description: Querying or mutating RootCX data from React using @rootcx/sdk hooks — useAppCollection, useAppRecord, useIntegration, useCoreCollection, useRuntimeClient. Covers QueryOptions, where operators, cross-app reads, and the flat record shape.
+description: Querying or mutating RootCX data from React using @rootcx/sdk hooks — useAppCollection, useAppRecord, useIntegration, useCoreCollection, useCrons, useRuntimeClient. Covers QueryOptions, where operators, cross-app reads, cron scheduling, and the flat record shape. Triggers on cron, schedule, recurring, periodic, interval, timer, useCrons.
 version: 0.1.0
 ---
 
@@ -70,6 +70,26 @@ Returns: `{ data: T[], loading, error, refetch }`
 Read-only access to core platform entities. `GET /api/v1/{entity}` (not app collections).
 
 **`core:users` in manifest `entity_link` references → use `useCoreCollection("users")` to fetch org members. Do NOT use `useAppCollection` with `core:users` — it will 404.**
+
+## useCrons
+
+```tsx
+const { data, loading, error, refetch, create, update, remove, trigger } = useCrons(appId);
+```
+
+Returns: `{ data: CronSchedule[], loading, error, refetch, create, update, remove, trigger }`
+
+CRUD for scheduled jobs. Crons fire via pg_cron → pgmq → Core scheduler → worker `onJob` handler.
+
+`create({ name, schedule, payload?, timezone?, overlapPolicy? }) → CronSchedule` · `update(id, { schedule?, payload?, enabled?, overlapPolicy? }) → CronSchedule` · `remove(id) → void` · `trigger(id) → { msgId }` (manual fire)
+
+**schedule:** 5-field cron (`"0 9 * * *"` = daily 9am) or `"N seconds"` interval (`"10 seconds"`, 1-59). `$` = last day of month. **overlapPolicy:** `"skip"` (default, dedup) or `"queue"`. **payload:** arbitrary JSON passed to worker `onJob`.
+
+```tsx
+await create({ name: `check-${campaignId}`, schedule: "0 9 * * *", payload: { campaignId } });
+await update(cronId, { enabled: false }); // pause
+await trigger(cronId); // manual fire
+```
 
 ## useRuntimeClient
 

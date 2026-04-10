@@ -1,6 +1,6 @@
 ---
 name: rootcx-backend-worker
-description: Writing a RootCX app backend/ Bun worker — JSON-lines IPC protocol with Core, discover/rpc/job/shutdown messages, caller auth, data access patterns, and the minimal worker template. Load when implementing backend/index.ts or handling RPC methods and jobs.
+description: Writing a RootCX app backend/ Bun worker — serve() API with onJob for cron/scheduled jobs, RPC methods, IPC protocol, caller auth, data access patterns. Load when implementing backend/index.ts, handling RPC, jobs, crons, scheduled tasks, or recurring work.
 version: 0.1.0
 ---
 
@@ -95,6 +95,29 @@ async function dispatch(method: string, params: any, caller: Caller | null): Pro
   }
 }
 ```
+
+## serve() API (v2)
+
+Preferred over raw stdin/stdout. Prelude injects `serve()` globally:
+
+```typescript
+serve({
+  rpc: {
+    ping: async (params, caller, ctx) => ({ pong: true }),
+  },
+  onJob: async (payload, caller, ctx) => {
+    // Handles jobs from pgmq queue (enqueued by REST API or cron)
+    ctx.log.info("job received");
+    await ctx.collection("entity").insert({ field: "value" });
+  },
+  onStart: async (ctx) => { /* runs after discover handshake */ },
+  onShutdown: () => { /* cleanup */ },
+});
+```
+
+`ctx`: `{ appId, runtimeUrl, databaseUrl, credentials, agentConfig, log: { info, warn, error }, emit(name, data?), collection(entity): { insert, update }, uploadFile(content, filename, contentType) }`
+
+**Cron → onJob flow:** `useCrons().create({ schedule, payload })` → pg_cron fires → pgmq → scheduler → `onJob(payload)`. The `payload` contains what was set at cron creation + `cron_id`.
 
 ## Rules
 

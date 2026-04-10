@@ -78,10 +78,10 @@ Six specialized skills that teach Claude Code how to build for RootCX. Loaded au
 | Skill | Claude Code learns |
 |-------|-------------------|
 | **rootcx-manifest** | `manifest.json`: entities, field types, entity links, RBAC permissions, schema sync |
-| **rootcx-sdk-hooks** | `@rootcx/sdk`: `useAppCollection`, `useAppRecord`, `useIntegration`, query operators |
+| **rootcx-sdk-hooks** | `@rootcx/sdk`: `useAppCollection`, `useAppRecord`, `useIntegration`, `useCrons`, query operators |
 | **rootcx-ui** | `@rootcx/ui`: AppShell, Sidebar, DataTable, forms, dark mode, AuthGate |
-| **rootcx-rest-api** | Core REST API: collections CRUD, bulk ops, integrations, async jobs |
-| **rootcx-backend-worker** | Backend workers: Bun IPC protocol, RPC handlers, job processing |
+| **rootcx-rest-api** | Core REST API: collections CRUD, bulk ops, integrations, jobs, crons |
+| **rootcx-backend-worker** | Backend workers: `serve()` API, RPC handlers, `onJob` for jobs and crons |
 | **rootcx-agent** | AI agents: `agent.json`, LangGraph, IPC bridge, tool-calling with RBAC |
 
 ## What You Can Build
@@ -133,6 +133,16 @@ No MCP server. No background process. The plugin calls a fast native Rust binary
 - [Claude Code](https://docs.anthropic.com/en/docs/claude-code) (CLI, desktop app, or IDE extension)
 - [`rootcx` CLI](https://github.com/RootCX/RootCX/releases) in your PATH
 - A RootCX Core: [cloud](https://rootcx.com/app/register) or [self-hosted](https://rootcx.com/docs/developers/self-hosting)
+
+## Updating
+
+To pull the latest version of this plugin:
+
+```
+/plugin marketplace update rootcx
+```
+
+Then restart Claude Code or run `/reload-plugins`.
 
 ## Community
 

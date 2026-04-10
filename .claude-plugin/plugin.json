@@ -1,6 +1,6 @@
 {
   "name": "rootcx",
-  "version": "0.1.0",
+  "version": "0.2.0",
   "description": "Official RootCX plugin. Build and deploy internal apps and AI agents directly from Claude Code.",
   "author": { "name": "RootCX", "url": "https://rootcx.com" },
   "homepage": "https://rootcx.com",
