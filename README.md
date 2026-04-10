@@ -40,7 +40,7 @@ Connect to any RootCX Core (local or cloud), scaffold full-stack projects, and d
 ### 2. Install the CLI
 
 ```
-curl -fsSL https://raw.githubusercontent.com/RootCX/RootCX/main/scripts/install.sh | sh
+curl -fsSL https://rootcx.com/install.sh | sh
 ```
 
 ### 3. Connect and build
